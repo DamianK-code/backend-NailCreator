@@ -4,11 +4,9 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.Objects;
 import java.util.Set;
@@ -39,7 +37,7 @@ public class Account implements UserDetails {
     @ToString.Exclude
     @JsonBackReference
     @OneToMany(mappedBy = "account", fetch = FetchType.LAZY)
-    private Set<FavouriteDogName> favouriteDogNames;
+    private Set<SavedNailsCreations> savedNailsCreations;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
