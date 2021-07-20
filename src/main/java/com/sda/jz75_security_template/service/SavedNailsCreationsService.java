@@ -5,6 +5,7 @@ import com.sda.jz75_security_template.model.SavedNailsCreations;
 import com.sda.jz75_security_template.repository.SavedNailsCreationsRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
 import java.util.Set;
@@ -14,7 +15,5 @@ import java.util.Set;
 public class SavedNailsCreationsService {
     private final SavedNailsCreationsRepository savedNailsCreationsRepository;
 
-    public Set<SavedNailsCreations> savedNailsCreationsSet(Account account){
-        return savedNailsCreationsRepository.findAllByName(account.getUsername());
-    }
+
 }

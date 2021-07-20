@@ -12,7 +12,4 @@ import java.util.Optional;
 public class HandService {
     private final HandRepository handRepository;
 
-    public Optional<Hand> handSite(Hand hand){
-     return handRepository.findByHandSide(hand.getHandSide());
-    }
 }

@@ -9,5 +9,4 @@ import java.util.Optional;
 
 @Repository
 public interface HandRepository  extends JpaRepository<Hand, Long> {
-    Optional <Hand> findByHandSide(HandSide handSide);
 }

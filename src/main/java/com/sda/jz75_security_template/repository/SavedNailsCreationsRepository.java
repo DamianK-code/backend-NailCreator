@@ -10,5 +10,4 @@ import java.util.Set;
 
 @Repository
 public interface SavedNailsCreationsRepository extends JpaRepository<SavedNailsCreations, Long> {
-    Set<SavedNailsCreations> findAllByName(String name);
 }

@@ -9,5 +9,4 @@ import java.util.Optional;
 
 @Repository
 public interface FingerRepository extends JpaRepository<Finger, Long> {
-    Optional<Finger> findByFingers(Fingers fingers);
 }

@@ -68,7 +68,6 @@ public class Index {
             if(usernamePasswordAuthenticationToken.getPrincipal() instanceof Account) {
                 Account account = (Account) usernamePasswordAuthenticationToken.getPrincipal();
                 model.addAttribute("uzytkownik", account);
-                model.addAttribute("favouriteDogNamesList", savedNailsCreationsService.favouriteDogNameList(account));
             }
         }
         return "authenticated";
