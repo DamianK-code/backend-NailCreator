@@ -1,15 +1,23 @@
 package com.sda.jz75_security_template.model.dto;
 
 import com.sda.jz75_security_template.model.HandSide;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.intellij.lang.annotations.Identifier;
 
+import java.util.List;
+
 @Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class HandDto {
 
-    private Identifier id;
+    private Long identifier;
     private HandSide handSide;
-    private FingerDto fingerDto;
+    private List<FingerDto> fingers;
 //    {
 //            identifier: null,
 //            handSide: 'RIGHT',

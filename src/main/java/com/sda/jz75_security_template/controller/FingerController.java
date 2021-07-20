@@ -11,11 +11,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class FingerController {
     private final FingerService fingerService;
-
-    @GetMapping("/edit")
-
-
-
     // 1. Zapisz palec o podanym ID
     // zwrócony typ to FingerDto
 }
