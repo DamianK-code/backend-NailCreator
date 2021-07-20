@@ -13,6 +13,8 @@ public class SavedNailsCreationController {
 
     private final SavedNailsCreationsService savedNailsCreationsService;
 
+
+
     // 1. Pobierz wszystkie kreacje - ID + nazwa
     // 2. Pobierz krecję o podanym ID -> { obie ręce }
     // 3. Zapisz podaną kreację (całą) -> id/null

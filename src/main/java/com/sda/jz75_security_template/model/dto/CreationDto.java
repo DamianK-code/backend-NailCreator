@@ -1,6 +1,15 @@
 package com.sda.jz75_security_template.model.dto;
 
+import lombok.Data;
+import org.intellij.lang.annotations.Identifier;
+
+@Data
 public class CreationDto {
+
+    private Identifier id;
+    private String name;
+    private HandDto right;
+    private HandDto left;
 //    {
 //        id: null,
 //        name: null,

@@ -1,6 +1,15 @@
 package com.sda.jz75_security_template.model.dto;
 
+import com.sda.jz75_security_template.model.HandSide;
+import lombok.Data;
+import org.intellij.lang.annotations.Identifier;
+
+@Data
 public class HandDto {
+
+    private Identifier id;
+    private HandSide handSide;
+    private FingerDto fingerDto;
 //    {
 //            identifier: null,
 //            handSide: 'RIGHT',
