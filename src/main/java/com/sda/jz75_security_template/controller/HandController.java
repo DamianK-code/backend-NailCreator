@@ -4,10 +4,7 @@ import com.sda.jz75_security_template.model.dto.CreationDto;
 import com.sda.jz75_security_template.model.dto.HandDto;
 import com.sda.jz75_security_template.service.HandService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/hand/")
@@ -17,8 +14,13 @@ public class HandController {
 
     // 1. zapisz rękę o podanym ID
     @PostMapping("/{id}")
-    public void saveCreation(@RequestBody HandDto handDto){
+    public void saveCreation(@RequestBody HandDto handDto) {
         handService.save(handDto);
     }
     // 2. pobierz rękę o podanym ID
+
+    @GetMapping({"/{id}"})
+    public void getCreation(@RequestBody HandDto handDto) {
+        handService.getHand(handDto);
+    }
 }

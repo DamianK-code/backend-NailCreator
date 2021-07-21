@@ -28,4 +28,15 @@ public class HandService {
             }
         }
     }
+
+    public void getHand(HandDto handDto) {
+        Hand getObject = mapper.handFromDto(handDto);
+        if (handDto.getIdentifier() != null) {
+            Optional<Hand> handOptional = handRepository.findById(handDto.getIdentifier());
+            if (handOptional.isPresent()) {
+                Hand hand = handOptional.get();
+
+            }
+        }
+    }
 }
