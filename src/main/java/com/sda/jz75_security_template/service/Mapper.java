@@ -53,11 +53,15 @@ public class Mapper {
 
     public Set<Finger> mapFingersFromdto(List<FingerDto> fingers) {
         return fingers.stream()
-                .map(finger -> Finger.builder()
-                        .id(finger.getIdentifier())
-                        .color(finger.getColor())
-                        .finger(finger.getLabel())
-                        .build())
+                .map(finger -> mapFingerFromDto(finger))
                 .collect(Collectors.toSet());
+    }
+
+    public Finger mapFingerFromDto(FingerDto finger) {
+        return Finger.builder()
+                .id(finger.getIdentifier())
+                .color(finger.getColor())
+                .finger(finger.getLabel())
+                .build();
     }
 }

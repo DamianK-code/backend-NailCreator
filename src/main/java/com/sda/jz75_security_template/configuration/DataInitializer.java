@@ -1,15 +1,14 @@
 package com.sda.jz75_security_template.configuration;
 
-import com.sda.jz75_security_template.model.Account;
-import com.sda.jz75_security_template.model.AccountRole;
-import com.sda.jz75_security_template.repository.AccountRepository;
-import com.sda.jz75_security_template.repository.AccountRoleRepository;
+import com.sda.jz75_security_template.model.*;
+import com.sda.jz75_security_template.repository.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
@@ -32,6 +31,9 @@ public class DataInitializer implements ApplicationListener<ContextRefreshedEven
     private final PasswordEncoder passwordEncoder;
     private final AccountRepository accountRepository;
     private final AccountRoleRepository accountRoleRepository;
+    private final FingerRepository fingerRepository;
+    private final HandRepository handRepository;
+    private final SavedNailsCreationsRepository savedNailsCreationsRepository;
 
     @Override
     public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
@@ -40,7 +42,42 @@ public class DataInitializer implements ApplicationListener<ContextRefreshedEven
         }
 
         addUser(ADMIN_USERNAME, ADMIN_PASSWORD, AVAILABLE_ROLES);
-        addUser("user", "resu", new String[] {ROLE_USER});
+        addUser("user", "resu", new String[]{ROLE_USER});
+
+        addInitialCreation(new SavedNailsCreations(
+                null,
+                "initial",
+                new Hand(null, HandSide.RIGHT,
+                        new HashSet<>(Arrays.asList(
+                                new Finger(null, "#f00", Fingers.THUMB),
+                                new Finger(null, "#0f0", Fingers.POINTING_FINGER),
+                                new Finger(null, "#f0f", Fingers.MIDDLE_FINGER),
+                                new Finger(null, "#f00", Fingers.RING_FINGER),
+                                new Finger(null, "#0f0", Fingers.LITTLE_FINGER)
+                        ))),
+                new Hand(null, HandSide.LEFT,
+                        new HashSet<>(Arrays.asList(
+                                new Finger(null, "#f0f", Fingers.THUMB),
+                                new Finger(null, "#0ff", Fingers.POINTING_FINGER),
+                                new Finger(null, "#0ff", Fingers.MIDDLE_FINGER),
+                                new Finger(null, "#ff0", Fingers.RING_FINGER),
+                                new Finger(null, "#fff", Fingers.LITTLE_FINGER)
+                        ))),
+                null));
+    }
+
+    private void addInitialCreation(SavedNailsCreations initial) {
+        for (Finger finger : initial.getLeft().getFingers()) {
+            finger = fingerRepository.save(finger);
+        }
+        for (Finger finger : initial.getRight().getFingers()) {
+            finger = fingerRepository.save(finger);
+        }
+
+        initial.setLeft(handRepository.save(initial.getLeft()));
+        initial.setRight(handRepository.save(initial.getRight()));
+
+        savedNailsCreationsRepository.save(initial);
     }
 
     private void addUser(String username, String password, String[] roles) {
@@ -59,7 +96,7 @@ public class DataInitializer implements ApplicationListener<ContextRefreshedEven
             Set<AccountRole> rolesSet = new HashSet<>();
             for (String role : roles) {
                 Optional<AccountRole> optionalAccountRole = accountRoleRepository.findByName(role);
-                if(optionalAccountRole.isPresent()){
+                if (optionalAccountRole.isPresent()) {
                     AccountRole accountRole = optionalAccountRole.get();
                     rolesSet.add(accountRole);
                 }

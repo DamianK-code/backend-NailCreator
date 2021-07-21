@@ -29,14 +29,12 @@ public class HandService {
         }
     }
 
-    public void getHand(HandDto handDto) {
-        Hand getObject = mapper.handFromDto(handDto);
-        if (handDto.getIdentifier() != null) {
-            Optional<Hand> handOptional = handRepository.findById(handDto.getIdentifier());
-            if (handOptional.isPresent()) {
-                Hand hand = handOptional.get();
-
-            }
+    public Hand getHand(Long id) {
+        Optional<Hand> handOptional = handRepository.findById(id);
+        if (handOptional.isPresent()) {
+            Hand hand = handOptional.get();
+            return hand;
         }
+        throw new UnsupportedOperationException("Hand not found!");
     }
 }

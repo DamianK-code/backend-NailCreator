@@ -7,15 +7,13 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/finger/")
+@RequestMapping("/api/finger")
 @RequiredArgsConstructor
 public class FingerController {
     private final FingerService fingerService;
-//
-//    @PostMapping("/{id}")
-//    public void saveFinger(@RequestBody FingerDto fingerDto) {
-//        fingerService.save(fingerDto);
-        // 1. Zapisz palec o podanym ID
-        // zwrócony typ to FingerDto
-//    }
+
+    @PostMapping("")
+    public void saveFinger(@RequestBody FingerDto fingerDto) {
+        fingerService.save(fingerDto);
+    }
 }

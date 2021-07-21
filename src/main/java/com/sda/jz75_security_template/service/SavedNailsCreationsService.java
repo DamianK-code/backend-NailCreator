@@ -26,9 +26,12 @@ public class SavedNailsCreationsService {
 
     // zwróć z bazy wszystkie kreacje
     public List<SimpleCreationDto> findAll() {
-//        return savedNailsCreationsRepository.findAll()
-//                .stream()
-        return null;
+        return savedNailsCreationsRepository.findAll()
+                .stream()
+                .map(creation -> SimpleCreationDto.builder()
+                        .identifier(creation.getId())
+                        .name(creation.getName())
+                        .build()).collect(Collectors.toList());
     }
 
     public CreationDto getById(Long id) {

@@ -1,5 +1,6 @@
 package com.sda.jz75_security_template.controller;
 
+import com.sda.jz75_security_template.model.Hand;
 import com.sda.jz75_security_template.model.dto.CreationDto;
 import com.sda.jz75_security_template.model.dto.HandDto;
 import com.sda.jz75_security_template.service.HandService;
@@ -20,7 +21,7 @@ public class HandController {
     // 2. pobierz rękę o podanym ID
 
     @GetMapping({"/{id}"})
-    public void getCreation(@RequestBody HandDto handDto) {
-        handService.getHand(handDto);
+    public Hand getHand(@PathVariable Long id) {
+        return handService.getHand(id);
     }
 }
