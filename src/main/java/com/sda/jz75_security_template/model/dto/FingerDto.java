@@ -1,12 +1,10 @@
 package com.sda.jz75_security_template.model.dto;
 
-import com.sda.jz75_security_template.model.Finger;
 import com.sda.jz75_security_template.model.Fingers;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.intellij.lang.annotations.Identifier;
 
 @Data
 @Builder

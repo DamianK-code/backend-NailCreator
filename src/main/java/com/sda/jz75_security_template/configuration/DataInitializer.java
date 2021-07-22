@@ -44,26 +44,28 @@ public class DataInitializer implements ApplicationListener<ContextRefreshedEven
         addUser(ADMIN_USERNAME, ADMIN_PASSWORD, AVAILABLE_ROLES);
         addUser("user", "resu", new String[]{ROLE_USER});
 
-        addInitialCreation(new SavedNailsCreations(
-                null,
-                "initial",
-                new Hand(null, HandSide.RIGHT,
-                        new HashSet<>(Arrays.asList(
-                                new Finger(null, "#f00", Fingers.THUMB),
-                                new Finger(null, "#0f0", Fingers.POINTING_FINGER),
-                                new Finger(null, "#f0f", Fingers.MIDDLE_FINGER),
-                                new Finger(null, "#f00", Fingers.RING_FINGER),
-                                new Finger(null, "#0f0", Fingers.LITTLE_FINGER)
-                        ))),
-                new Hand(null, HandSide.LEFT,
-                        new HashSet<>(Arrays.asList(
-                                new Finger(null, "#f0f", Fingers.THUMB),
-                                new Finger(null, "#0ff", Fingers.POINTING_FINGER),
-                                new Finger(null, "#0ff", Fingers.MIDDLE_FINGER),
-                                new Finger(null, "#ff0", Fingers.RING_FINGER),
-                                new Finger(null, "#fff", Fingers.LITTLE_FINGER)
-                        ))),
-                null));
+        if(fingerRepository.count() == 0) {
+            addInitialCreation(new SavedNailsCreations(
+                    null,
+                    "initial",
+                    new Hand(null, HandSide.RIGHT,
+                            new HashSet<>(Arrays.asList(
+                                    new Finger(null, "#f00", Fingers.THUMB),
+                                    new Finger(null, "#0f0", Fingers.POINTING_FINGER),
+                                    new Finger(null, "#f0f", Fingers.MIDDLE_FINGER),
+                                    new Finger(null, "#f00", Fingers.RING_FINGER),
+                                    new Finger(null, "#0f0", Fingers.LITTLE_FINGER)
+                            ))),
+                    new Hand(null, HandSide.LEFT,
+                            new HashSet<>(Arrays.asList(
+                                    new Finger(null, "#f0f", Fingers.THUMB),
+                                    new Finger(null, "#0ff", Fingers.POINTING_FINGER),
+                                    new Finger(null, "#0ff", Fingers.MIDDLE_FINGER),
+                                    new Finger(null, "#ff0", Fingers.RING_FINGER),
+                                    new Finger(null, "#fff", Fingers.LITTLE_FINGER)
+                            ))),
+                    null));
+        }
     }
 
     private void addInitialCreation(SavedNailsCreations initial) {

@@ -25,6 +25,4 @@ public class Hand {
 
     @OneToMany
     private Set<Finger> fingers;
-
-
 }

@@ -1,5 +1,6 @@
 package com.sda.jz75_security_template.service;
 
+import com.sda.jz75_security_template.model.Finger;
 import com.sda.jz75_security_template.model.Hand;
 import com.sda.jz75_security_template.model.SavedNailsCreations;
 import com.sda.jz75_security_template.model.dto.HandDto;
@@ -14,6 +15,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class HandService {
     private final HandRepository handRepository;
+    private final FingerService fingerService;
     private final Mapper mapper;
 
     public void save(HandDto handDto) {
@@ -26,6 +28,8 @@ public class HandService {
 
                 handRepository.save(hand);
             }
+        }else{
+            handRepository.save(updateObject);
         }
     }
 
@@ -36,5 +40,12 @@ public class HandService {
             return hand;
         }
         throw new UnsupportedOperationException("Hand not found!");
+    }
+
+    public SavedNailsCreations saveCreation(SavedNailsCreations updateObject) {
+        updateObject.setLeft(handRepository.save(fingerService.saveHand(updateObject.getLeft())));
+        updateObject.setRight(handRepository.save(fingerService.saveHand(updateObject.getRight())));
+
+        return updateObject;
     }
 }

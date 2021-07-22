@@ -14,7 +14,7 @@ public class FingerController {
     private final FingerService fingerService;
 
     @PostMapping("")
-    public void saveFinger(@RequestBody FingerDto fingerDto) {
-        fingerService.save(fingerDto);
+    public FingerDto saveFinger(@RequestBody FingerDto fingerDto) {
+        return fingerService.save(fingerDto);
     }
 }

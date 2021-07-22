@@ -22,6 +22,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class SavedNailsCreationsService {
     private final SavedNailsCreationsRepository savedNailsCreationsRepository;
+    private final HandService handService;
     private final Mapper mapper;
 
     // zwróć z bazy wszystkie kreacje
@@ -49,7 +50,7 @@ public class SavedNailsCreationsService {
         throw new UnsupportedOperationException("Bad id.");
     }
 
-    public void save(CreationDto creationDto) {
+    public CreationDto save(CreationDto creationDto) {
         SavedNailsCreations updateObject = mapper.fromDto(creationDto);
         if (creationDto.getIdentifier() != null) {
             Optional<SavedNailsCreations> savedNailsCreationsOpt = savedNailsCreationsRepository.findById(creationDto.getIdentifier());
@@ -59,8 +60,12 @@ public class SavedNailsCreationsService {
 
                 savedNailsCreations.setName(updateObject.getName());
 
-                savedNailsCreationsRepository.save(savedNailsCreations);
+                return mapper.toCreationDto(savedNailsCreationsRepository.save(savedNailsCreations));
             }
+        } else {
+            updateObject = handService.saveCreation(updateObject);
+            return mapper.toCreationDto(savedNailsCreationsRepository.save(updateObject));
         }
+        throw new UnsupportedOperationException("Cos jest mocno nie ok.");
     }
 }

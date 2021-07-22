@@ -64,4 +64,12 @@ public class Mapper {
                 .finger(finger.getLabel())
                 .build();
     }
+
+    public CreationDto toCreationDto(SavedNailsCreations save) {
+        return new CreationDto(save.getId(), save.getName(), mapHand(save.getRight()), mapHand(save.getLeft()));
+    }
+
+    public FingerDto mapToFingerDto(Finger save) {
+        return new FingerDto(save.getId(), save.getFinger(), save.getColor());
+    }
 }

@@ -20,20 +20,20 @@ public class SavedNailsCreationController {
 
     // 1. Pobierz wszystkie kreacje - List <ID + nazwa>
     @GetMapping("")
-    public List<SimpleCreationDto> getCreation(){
+    public List<SimpleCreationDto> getCreation() {
         return savedNailsCreationsService.findAll();
     }
 
     // 2. Pobierz krecję o podanym ID -> { obie ręce }
     @GetMapping("/{id}")
-    public CreationDto getCreation(@PathVariable Long id){
+    public CreationDto getCreation(@PathVariable Long id) {
         return savedNailsCreationsService.getById(id);
     }
 
     // 3. Zapisz podaną kreację (całą) -> id/null
     @PostMapping("")
-    public void saveCreation(@RequestBody CreationDto creationDto){
-        savedNailsCreationsService.save(creationDto);
+    public CreationDto saveCreation(@RequestBody CreationDto creationDto) {
+        return savedNailsCreationsService.save(creationDto);
     }
 
 
